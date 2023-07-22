@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef  } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Formik  } from 'formik';
 import * as yup from 'yup';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
+import Toast from 'react-native-toast-message';
+
+
 
 // Esquema de validação do formulário usando a biblioteca yup
 const validationSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
   email: yup.string().email('Email inválido').required('Email obrigatório'),
-  phone: yup.string().required('Telefone obrigatório'),
+  phone: yup
+    .string()
+    .required('Telefone obrigatório')
+    // Essa regex permite somente numeros e os caracteres especiais + ( ) -
+    .matches(/^[0-9+() -]+$/, 'Telefone inválido'), 
   password: yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres').required('Senha obrigatória'),
   confirmPassword: yup.string()
     .oneOf([yup.ref('password')], 'As senhas devem ser iguais')
@@ -24,11 +31,29 @@ export default function CadastroForm () {
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
-    // Irá exibir os dados do formulário no console
+    // Referências para os campos de input do formulário
+    const nameRef = useRef<TextInput>(null);
+    const emailRef = useRef<TextInput>(null);
+    const phoneRef = useRef<TextInput>(null);
+    const passwordRef = useRef<TextInput>(null);
+    const confirmPasswordRef = useRef<TextInput>(null);
+
+    // Função para avançar para o próximo campo quando clicar no check do teclado
+    const goToNextField = (nextFieldRef: any) => {
+        nextFieldRef.current.focus();
+    };
+    
+    // Irá exibir os dados do formulário no console e o toast
     const handleSubmitFormik = (values: any) => {
         console.log(values);
+        Toast.show({
+            type: 'success',
+            text1: 'Conta criada com sucesso!',
+            text2: 'Conferir o console para verificar o envio dos dados!'
+          });
     };
 
+    // Carrega a fonte definida no figma
     const [fontLoaded] = useFonts({
         Poppins_400Regular,
     });
@@ -53,7 +78,10 @@ export default function CadastroForm () {
                         onBlur={handleBlur('name')}
                         value={values.name}
                         placeholder="nome"
-                        placeholderTextColor="#666666" // Cor do texto do placeholder
+                        placeholderTextColor="#666666"
+                        ref={nameRef}
+                        returnKeyType="next" // Avançar para o próximo campo ao pressionar "Enter" (ou ícone de "check")
+                        onSubmitEditing={() => goToNextField(emailRef)}
                     />
 
                     <Text style={styles.label}>E-mail {touched.email && errors.email && <Text style={styles.errorText}>{errors.email}</Text>}</Text>
@@ -64,6 +92,9 @@ export default function CadastroForm () {
                         value={values.email}
                         placeholder="e-mail"
                         placeholderTextColor="#666666" 
+                        ref={emailRef}
+                        returnKeyType="next" // Avançar para o próximo campo ao pressionar "Enter" (ou ícone de "check")
+                        onSubmitEditing={() => goToNextField(phoneRef)}
                     />
 
                     <Text style={styles.label}>Telefone {touched.phone && errors.phone && <Text style={styles.errorText}>{errors.phone}</Text>}</Text>
@@ -73,7 +104,10 @@ export default function CadastroForm () {
                         onBlur={handleBlur('phone')}
                         value={values.phone}
                         placeholder="telefone"
-                        placeholderTextColor="#666666" 
+                        placeholderTextColor="#666666"
+                        ref={phoneRef}
+                        returnKeyType="next" // Avançar para o próximo campo ao pressionar "Enter" (ou ícone de "check")
+                        onSubmitEditing={() => goToNextField(passwordRef)}
                     />
 
                     <Text style={styles.label}>Criar Senha {touched.password && errors.password && <Text style={styles.errorText}>{errors.password}</Text>}</Text>
@@ -85,10 +119,13 @@ export default function CadastroForm () {
                             value={values.password}
                             placeholder="senha"
                             secureTextEntry={!showPassword}
-                            placeholderTextColor="#666666" 
+                            placeholderTextColor="#666666"
+                            ref={passwordRef}
+                            returnKeyType="next" // Avançar para o próximo campo ao pressionar "Enter" (ou ícone de "check")
+                            onSubmitEditing={() => goToNextField(confirmPasswordRef)}
                         />
                         <TouchableOpacity style={styles.passwordIconContainer} onPress={togglePasswordVisibility}>
-                            <Icon name={showPassword ? 'eye-slash' : 'eye'} size={22} color="#666666" />
+                            <Icon name={showPassword ? 'eye-outline' : 'eye-off-outline'} size={22} color="#666666" />
                         </TouchableOpacity>
                     </View>
 
@@ -102,9 +139,11 @@ export default function CadastroForm () {
                             placeholder="senha"
                             secureTextEntry={!showConfirmPassword}
                             placeholderTextColor="#666666"
+                            ref={confirmPasswordRef}
+                            returnKeyType="next" // Avançar para o próximo campo ao pressionar "Enter" (ou ícone de "check")
                         />
                         <TouchableOpacity style={styles.passwordIconContainer} onPress={toggleConfirmPasswordVisibility}>
-                            <Icon name={showConfirmPassword ? 'eye-slash' : 'eye'} size={22} color="#666666" />
+                            <Icon name={showConfirmPassword ? 'eye-outline' : 'eye-off-outline'} size={22} color="#666666" />
                         </TouchableOpacity>
                     </View>
 
