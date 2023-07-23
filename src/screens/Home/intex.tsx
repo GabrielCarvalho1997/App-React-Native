@@ -1,11 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Image,TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image,TouchableOpacity, FlatList, ScrollView } from "react-native";
 import Header from '../../components/Header';
 import {useFonts, Poppins_600SemiBold, Poppins_500Medium} from '@expo-google-fonts/poppins';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
-
-
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Home() {
 
@@ -70,49 +68,60 @@ export default function Home() {
 
 
     return (
-        <View>
-            <Header />
-            <Text style={styles.text}>Localização</Text>
-            <Image
-                source={require("../../assets/images/mapa.png")}
-                style={styles.image}
-            />
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity activeOpacity={0.7} style={styles.button}>
-                    <Text style={styles.buttonText}>Ativar o GPS</Text>
-                </TouchableOpacity>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View>
+                <Header />
+                <Text style={styles.text}>Localização</Text>
+                <Image
+                    source={require("../../assets/images/mapa.png")}
+                    style={styles.image}
+                />
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                        <Text style={styles.buttonText}>Ativar o GPS</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.divider} />
+
+                <Text style={styles.text}>Serviços e Reservas Próximos</Text>
+
+                <FlatList
+                    data={carouselImageData}
+                    renderItem={renderCarouselImageItem}
+                    windowSize={wp('100%')}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false} 
+                    snapToAlignment={'start'} 
+                    decelerationRate={'fast'}
+                    contentContainerStyle={styles.carouselContainer}
+                />
+
+                <View style={styles.divider} />
+
+                <Text style={styles.text}>Explore</Text>
+
+                <FlatList
+                    data={carouselIconData}
+                    renderItem={renderCarouseIconItem}
+                    windowSize={wp('100%')}
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false} 
+                    snapToAlignment={'start'} 
+                    decelerationRate={'fast'}
+                    contentContainerStyle={styles.carouselContainer}
+                />
+
+                <View style={styles.bottomBar} />
             </View>
-
-            <View style={styles.divider} />
-
-            <Text style={styles.text}>Serviços e Reservas Próximos</Text>
-
-            <SwiperFlatList
-                data={carouselImageData}
-                renderItem={renderCarouselImageItem}
-                windowSize={wp('100%')}
-                autoplay={false}
-            />
-
-            <View style={styles.divider} />
-
-            <Text style={styles.text}>Explore</Text>
-
-            <SwiperFlatList
-                data={carouselIconData}
-                renderItem={renderCarouseIconItem}
-                windowSize={wp('100%')}
-            />
-
-            <View style={styles.bottomBar} />
-        </View>
+        </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-    },
+        flexGrow: 1,
+      },
     text: {
         fontSize: 15,
         fontFamily: 'Poppins_600SemiBold',
@@ -152,25 +161,29 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#D9D9D9', 
     },
+    carouselContainer: {
+        paddingHorizontal: wp('5%'),
+        marginBottom: hp("1%")
+    },
 
     // Estilo do primeiro carousel
     carouselItemContainer: {
-        width: 156,
-        height: 137,
+        width: wp('45%'), 
+        height: hp('16%'), 
         borderRadius: 4.81,
         backgroundColor: '#f8f8f8',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        marginBottom: 20,
-        marginLeft: 20,
+        marginBottom: hp('2%'), 
+        marginLeft: wp('2%'), 
         elevation: 3,
     },
     carouselItemImage: {
-        width: 131,
-        height: 76.5,
+        width: wp('34%'), 
+        height: hp('10%'), 
         borderRadius: 8,
-        margin: 10,
-        alignSelf: 'center'
+        margin: wp('1%'), 
+        alignSelf: 'center',
     },
     carouselItemTitle: {
         fontFamily: 'Poppins_500Medium',
@@ -190,7 +203,7 @@ const styles = StyleSheet.create({
     carouselItemContainerSecond: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20
+        marginBottom: hp('2%'),
     },
     carouselItemContainerIcon: {
         width: 108,
@@ -216,7 +229,7 @@ const styles = StyleSheet.create({
 
     // Barra no final da tela
     bottomBar: {
-        height: 40,
+        height:40,
         backgroundColor: '#E1B12C',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,

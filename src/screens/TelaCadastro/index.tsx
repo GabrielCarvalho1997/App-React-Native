@@ -1,15 +1,10 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { View, Image, StyleSheet, ScrollView } from "react-native";
 import CadastroForm from "../../components/CadastroForm";
 
 export default function TelaCadastro() {
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      scrollEnabled={true}
-    >
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/logo1.png")}
@@ -18,7 +13,7 @@ export default function TelaCadastro() {
         />
       <CadastroForm />
       </View>
-    </KeyboardAwareScrollView>
+    </ScrollView>
   );
 }
 
