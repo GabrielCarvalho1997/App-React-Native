@@ -12,7 +12,7 @@ export default function TelaCadastro() {
     >
       <View style={styles.imageContainer}>
         <Image
-          source={require("../../assets/images/logo2.png")}
+          source={require("../../assets/images/logo1.png")}
           style={styles.image}
           resizeMode="contain"
         />
