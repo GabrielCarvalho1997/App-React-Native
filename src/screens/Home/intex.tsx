@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image,TouchableOpacity } from "react-native";
 import Header from '../../components/Header';
 import {useFonts, Poppins_600SemiBold, Poppins_500Medium} from '@expo-google-fonts/poppins';
 import Carousel from 'react-native-snap-carousel';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -30,11 +31,13 @@ export default function Home() {
 
     // Função para renderizar os itens do primeiro carrossel
     const renderCarouselImageItem = ({ item}: any ) => (
-        <View style={styles.carouselItemContainer}>
-            <Image source={item.image} style={styles.carouselItemImage} />
-            <Text style={styles.carouselItemTitle}>{item.title}</Text>
-            <Text style={styles.carouselItemText}>Ver mais</Text>
-        </View>
+        <TouchableOpacity activeOpacity={0.7}>
+            <View style={styles.carouselItemContainer}>
+                <Image source={item.image} style={styles.carouselItemImage} />
+                <Text style={styles.carouselItemTitle}>{item.title}</Text>
+                <Text style={styles.carouselItemText}>Ver mais</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     // Dados dos cards do segundo carrossel
@@ -53,14 +56,16 @@ export default function Home() {
 
     // Função para renderizar os itens do segundo carrossel
     const renderCarouseIconItem = ({ item}: any ) => (
-        <View style={styles.carouselItemContainerSecond}>
-            <View style={styles.carouselItemContainerIcon}>
-            <Image source={item.image} style={styles.carouselItemIcon} />
+        <TouchableOpacity activeOpacity={0.7}>
+            <View style={styles.carouselItemContainerSecond}>
+                <View style={styles.carouselItemContainerIcon}>
+                <Image source={item.image} style={styles.carouselItemIcon} />
+                </View>
+                <View>
+                <Text style={styles.carouselItemTitleIcon}>{item.title}</Text>
+                </View>
             </View>
-            <View>
-            <Text style={styles.carouselItemTitleIcon}>{item.title}</Text>
-            </View>
-        </View>
+        </TouchableOpacity>
         
     );
 
@@ -68,48 +73,39 @@ export default function Home() {
     return (
         <View>
             <Header />
-                <Text style={styles.text}>Localização</Text>
-                <Image
-                    source={require("../../assets/images/mapa.png")}
-                    style={styles.image}
-                />
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Ativar o GPS</Text>
-                    </TouchableOpacity>
-                </View>
+            <Text style={styles.text}>Localização</Text>
+            <Image
+                source={require("../../assets/images/mapa.png")}
+                style={styles.image}
+            />
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Ativar o GPS</Text>
+                </TouchableOpacity>
+            </View>
 
-                <View style={styles.divider} />
+            <View style={styles.divider} />
 
-                <Text style={styles.text}>Serviços e Reservas Próximos</Text>
+            <Text style={styles.text}>Serviços e Reservas Próximos</Text>
 
-                <Carousel
-                    data={carouselImageData}
-                    renderItem={renderCarouselImageItem}
-                    sliderWidth={wp('100%')}
-                    itemWidth={wp('50%')}
-                    inactiveSlideScale={1} 
-                    inactiveSlideOpacity={1}
-                    activeSlideAlignment={'start'}
-                    loop={false}
-                />
+            <SwiperFlatList
+                data={carouselImageData}
+                renderItem={renderCarouselImageItem}
+                windowSize={wp('100%')}
+                autoplay={false}
+            />
 
-                <View style={styles.divider} />
+            <View style={styles.divider} />
 
-                <Text style={styles.text}>Explore</Text>
+            <Text style={styles.text}>Explore</Text>
 
-                <Carousel
-                    data={carouselIconData}
-                    renderItem={renderCarouseIconItem}
-                    sliderWidth={wp('100%')}
-                    itemWidth={wp('35%')}
-                    inactiveSlideScale={1} 
-                    inactiveSlideOpacity={1}
-                    activeSlideAlignment={'start'}
-                    loop={false}
-                />
+            <SwiperFlatList
+                data={carouselIconData}
+                renderItem={renderCarouseIconItem}
+                windowSize={wp('100%')}
+            />
 
-                <View style={styles.bottomBar} />
+            <View style={styles.bottomBar} />
         </View>
   );
 }
@@ -163,7 +159,7 @@ const styles = StyleSheet.create({
         width: 156,
         height: 137,
         borderRadius: 4.81,
-        backgroundColor: '#E1B12C',
+        backgroundColor: '#f8f8f8',
         alignItems: 'flex-start',
         justifyContent: 'center',
         marginBottom: 20,
@@ -188,6 +184,7 @@ const styles = StyleSheet.create({
         fontSize: 11,
         marginLeft: 16,
         marginTop: -5,
+        color: "#E1B12C"
     },
 
     // Estilo do segundo carousel

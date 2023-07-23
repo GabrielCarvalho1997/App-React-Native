@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function Header({ navigation }: any) {
+export default function Header() {
   const route = useRoute();
+  const navigation = useNavigation();
 
   // Mostra o cabeçalho somente se for a tela "Home"
   const isHomeScreen = route.name === 'Home';
@@ -17,7 +18,7 @@ export default function Header({ navigation }: any) {
 
       <TouchableOpacity
         style={headerStyles.menuIcon}
-        onPress={() => navigation.openDrawer()}
+        onPress={() => navigation.navigate("TelaCadastro")}
       >
         <Icon name="menu-outline" size={40} color="#FFFFFF" />
       </TouchableOpacity>

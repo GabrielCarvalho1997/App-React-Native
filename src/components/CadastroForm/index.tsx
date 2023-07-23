@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
 import Toast from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -24,6 +25,9 @@ const validationSchema = yup.object().shape({
 });
 
 export default function CadastroForm () {
+
+    const navigation = useNavigation();
+
 
     // Usados para controlar a visibilidade da senha no formulário
     const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +54,8 @@ export default function CadastroForm () {
             type: 'success',
             text1: 'Conta criada com sucesso!',
             text2: 'Conferir o console para verificar o envio dos dados!'
-          });
+        });
+        navigation.navigate('Home');
     };
 
     // Carrega a fonte definida no figma

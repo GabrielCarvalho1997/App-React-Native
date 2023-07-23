@@ -31,7 +31,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="TelaCadastro">
           <Stack.Screen
             name="Home"
             component={Home}
@@ -40,9 +40,10 @@ export default function App() {
           <Stack.Screen
             name="TelaCadastro"
             component={TelaCadastro}
-            options={({ navigation }) => ({
-              header: () => <Header navigation={navigation} />,
-            })}
+            options={{ headerShown: false }}
+            // options={({ navigation }) => ({
+            //   header: () => <Header navigation={navigation} />,
+            // })}
           />
         </Stack.Navigator>
       </NavigationContainer>

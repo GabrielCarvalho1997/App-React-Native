@@ -16,8 +16,8 @@ export default function TelaCadastro() {
           style={styles.image}
           resizeMode="contain"
         />
-      </View>
       <CadastroForm />
+      </View>
     </KeyboardAwareScrollView>
   );
 }
@@ -31,10 +31,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    marginVertical: 26
   },
   image: {
-    width: 113,
-    height: 113,
+    width: 90,
+    height: 90,
+    marginVertical: 10
   },
 });
