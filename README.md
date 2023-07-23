@@ -10,21 +10,21 @@ Antes de iniciar, verifique se você possui o Git, Node.js e o Expo instalados e
 
 Para clonar o repositório, utilize o seguinte comando no terminal:
 
-git clone git@github.com:GabrielCarvalho/ProjetoTrainee.git
+- git clone git@github.com:GabrielCarvalho/ProjetoTrainee.git
 
 
 ### 2 - Instalar as Dependências
 
 Após clonar o repositório, instale as dependências de desenvolvimento com o seguinte comando:
 
-npm install
+- npm install
 
 
 ### 3 - Executar o Programa
 
 Para executar o programa, utilize o seguinte comando:
 
-npm start
+- npm start
 
 
 ## Observações
