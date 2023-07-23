@@ -22,7 +22,7 @@ Após clonar o repositório, instale as dependências de desenvolvimento com o s
 
 ### 3 - Executar o Programa
 
-Para executar o programa, utilize o seguinte comando:
+Para executar o programa, utilize o seguinte comando com algum Virtual Device aberto:
 
 - npm start
 
