@@ -78,7 +78,7 @@ export default function Home() {
                 style={styles.image}
             />
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.button}>
                     <Text style={styles.buttonText}>Ativar o GPS</Text>
                 </TouchableOpacity>
             </View>

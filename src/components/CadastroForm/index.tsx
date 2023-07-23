@@ -52,8 +52,9 @@ export default function CadastroForm () {
         console.log(values);
         Toast.show({
             type: 'success',
-            text1: 'Conta criada com sucesso!',
-            text2: 'Conferir o console para verificar o envio dos dados!'
+            text1: 'Conferir o console!',
+            text2: 'Botão de menu volta para a tela de cadastro'
+            
         });
         navigation.navigate('Home');
     };
