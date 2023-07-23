@@ -4,7 +4,7 @@ import CadastroForm from "../../components/CadastroForm";
 
 export default function TelaCadastro() {
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/logo1.png")}
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 26
   },

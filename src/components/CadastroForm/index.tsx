@@ -167,11 +167,8 @@ export default function CadastroForm () {
   
   const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width: 328,
-        padding: 0,
-        margin: 0,
-        justifyContent: 'space-between'
+        flexGrow: 1,
+        justifyContent: 'space-between',
     },
     label: {
         fontSize: 16,
