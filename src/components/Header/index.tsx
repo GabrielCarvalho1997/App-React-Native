@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function Header() {
@@ -20,7 +20,7 @@ export default function Header() {
         style={headerStyles.menuIcon}
         onPress={() => navigation.navigate("TelaCadastro")}
       >
-        <Icon name="menu-outline" size={40} color="#FFFFFF" />
+        <Icon name="menu" size={40} color="#FFFFFF" />
       </TouchableOpacity>
 
       <View style={headerStyles.imageContainer}>
@@ -31,7 +31,7 @@ export default function Header() {
         />
       </View>
       
-      <Icon style={headerStyles.swapIcon} name="swap-horizontal-outline" size={40} color="#FFFFFF" />
+      <Icon style={headerStyles.swapIcon} name="tune-variant" size={40} color="#FFFFFF" />
     
     </View>
   );

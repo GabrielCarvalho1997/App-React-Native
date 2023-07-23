@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, Image,TouchableOpacity } from "react-native";
 import Header from '../../components/Header';
 import {useFonts, Poppins_600SemiBold, Poppins_500Medium} from '@expo-google-fonts/poppins';
-import Carousel from 'react-native-snap-carousel';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 
